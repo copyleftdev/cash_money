@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d2bfba4-ea98-41ee-81d2-d2d0f732d991" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/calculator.py" afterPath="$PROJECT_DIR$/cash_money.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="cash_money.iws" />
     <ignored path=".idea/workspace.xml" />
