@@ -74,15 +74,8 @@ def family_menu():
 def new_household():
     global family
     household_name = raw_input("Please name your household: ")
-    while True:
-        try:
-            earners = int(raw_input("How many people earn money in your household?: "))
-            break
-        except ValueError:
-            print "Please enter a number"
 
-    family = household.Household(household_name, earners)
-    print "The " + family.name + " household has " + str(family.earners) + " incomes."
+    family = household.Household(household_name)
     print "---------------------------------------------", "\n"
     family_menu()
 
