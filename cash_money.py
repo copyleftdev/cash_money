@@ -32,15 +32,16 @@ def family_menu():
     print "=============================================", "\n"
     print "1. Add a new family member"
     print "2. Remove a family member"
-    print "3. Show family info"
-    print "4. Rename family"
-    print "5. Save family"
-    print "6. Main Menu"
+    print "3. Edit a family member"
+    print "4. Show family info"
+    print "5. Rename family"
+    print "6. Save family"
+    print "7. Main Menu"
     print "=============================================", "\n"
 
     while True:
         try:
-            family_menu_choice = int(raw_input("Please choose a number:"))
+            family_menu_choice = int(raw_input("Please choose a number: \n"))
             break
         except ValueError:
             print "not a number"
@@ -49,21 +50,23 @@ def family_menu():
         new_family_member()
         family_menu()
     elif family_menu_choice == 2:
-        #remove family member
+        remove_family_member()
         family_menu()
     elif family_menu_choice == 3:
-        family.show_info()
-        raw_input("press enter to continue")
+        #edit family member
         family_menu()
     elif family_menu_choice == 4:
+        family.show_info()
+        raw_input("Press enter to continue: ")
+    elif family_menu_choice == 5:
         family.name = raw_input("What is your new family name?:")
         family.show_info()
         raw_input("press enter to continue")
         family_menu()
-    elif family_menu_choice == 5:
+    elif family_menu_choice == 6:
         #Save family
         family_menu()
-    elif family_menu_choice == 6:
+    elif family_menu_choice == 7:
         main_menu()
     else:
         "Please choose from the above choices"
@@ -139,8 +142,51 @@ def new_family_member():
         # print '\n'
 
         family.members.append([new_person.name, new_person.yearly_income, new_person.yearly_expenditure])
+        print "\n"
+        print name + " added!"
+        raw_input("Press enter to continue...")
+        family_menu()
+    elif menu_choice == 2:
+        while True:
+            global salary
+            try:
+                salary = float(raw_input("Yearly Salary: "))
+                break
+            except ValueError:
+                print "not a number"
+
+        name = raw_input("What is your name?: ")
+        new_person = monthly.MonthlyIncome(name, salary/12)
+        family.members.append([new_person.name, new_person.yearly_income, new_person.yearly_expenditure])
+        print "\n"
+        print name + " added!"
         raw_input("Press enter to continue:")
         family_menu()
+
+    elif menu_choice == 3:
+        name = raw_input("What is your name?: ")
+        new_person = monthly.MonthlyIncome(name, 0)
+        family.members.append([new_person.name, new_person.yearly_income, new_person.yearly_expenditure])
+        print "\n"
+        print name + " added!"
+        raw_input("Press enter to continue:")
+        family_menu()
+
+
+def remove_family_member():
+    print "Who would you like to delete?: "
+    for i in family.members:
+        print str(i[0]) + ": income = " + str(i[1]) + ", expenditure = " + str(i[2])
+
+    name = raw_input("Please enter a name: ")
+
+    for i in family.members:
+        if name in i:
+            family.members.remove(i)
+
+    print name + " has been deleted from the " + family.name + " family!"
+    raw_input("Press enter to continue: ")
+    family_menu()
 
 
 main_menu()
