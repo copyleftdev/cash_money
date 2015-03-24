@@ -6,15 +6,15 @@ class MonthlyIncome():
         self.expenditure = 0
         self.remaining = 0
         self.weekly_income = self.monthly_income / 4
-        self.yearly_income = self.weekly_income * 52
+        self.yearly_income = self.monthly_income * 12
         self.yearly_expenditure = self.expenditure * 12
 
     def show_info(self):
         print "---------------------------------------------"
         print self.name+": "
         print "Monthly Income: " + str(self.monthly_income)
-        print "Monthly Expenditures: "+ str(self.expenditure)
-        print "Monthly Remainder: "+ str(self.remaining)
+        print "Monthly Expenditures: " + str(self.expenditure)
+        print "Monthly Remainder: " + str(self.remaining)
         print "---------------------------------------------"
 
     def add_income(self, new_income):
