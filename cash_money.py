@@ -142,7 +142,9 @@ def new_family_member():
         # print '\n'
 
         family.members.append([new_person.name, new_person.yearly_income, new_person.yearly_expenditure])
-        raw_input("Press enter to continue:")
+        print "\n"
+        print name + " added!"
+        raw_input("Press enter to continue...")
         family_menu()
     elif menu_choice == 2:
         while True:
@@ -156,28 +158,35 @@ def new_family_member():
         name = raw_input("What is your name?: ")
         new_person = monthly.MonthlyIncome(name, salary/12)
         family.members.append([new_person.name, new_person.yearly_income, new_person.yearly_expenditure])
-
-    print '\n'
-    print "new_person.montly_income"
-    print new_person.monthly_income
-    print '\n'
-    print "new_person.yearly_income"
-    print new_person.yearly_income
-    print '\n'
-
-    raw_input("Press enter to continue:")
-    family_menu()
+        print "\n"
+        print name + " added!"
+        raw_input("Press enter to continue:")
+        family_menu()
 
     elif menu_choice == 3:
         name = raw_input("What is your name?: ")
         new_person = monthly.MonthlyIncome(name, 0)
         family.members.append([new_person.name, new_person.yearly_income, new_person.yearly_expenditure])
-
+        print "\n"
+        print name + " added!"
+        raw_input("Press enter to continue:")
+        family_menu()
 
 
 def remove_family_member():
+    print "Who would you like to delete?: "
     for i in family.members:
         print str(i[0]) + ": income = " + str(i[1]) + ", expenditure = " + str(i[2])
+
+    name = raw_input("Please enter a name: ")
+
+    for i in family.members:
+        if name in i:
+            family.members.remove(i)
+
+    print name + " has been deleted from the " + family.name + " family!"
+    raw_input("Press enter to continue: ")
     family_menu()
+
 
 main_menu()

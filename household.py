@@ -26,6 +26,9 @@ class Household():
         print "---------------------------------------------\n"
 
     def household_yearly_calculator(self):
+        self.yearly_income = 0
+        self.yearly_expenditure = 0
+        self.remainder = 0
 
         # adds all incomes and expenditures for each member to self.yearly_income and self.yearly_expenditure
         for i in self.members:

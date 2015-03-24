@@ -1,8 +1,2 @@
 *.pyc
 /.idea/*
-.idea/workspace.xml
-.idea/cash_money.iml
-.idea/encodings.xml
-.idea/misc.xml
-.idea/modules.xml
-.idea/vcs.xml
