@@ -127,7 +127,7 @@ def new_family_member():
         name = raw_input("What is your name?: ")
         pay = hourly_calculator.HourlyCalculator(hourly_rate, weekly_hrs)
         new_person = monthly.MonthlyIncome(name, pay.monthly_income)
-        #debug calculations
+        # debug calculations
         # print 'pay.hours_per_week'
         # print pay.hours_per_week
         # print "\n"
@@ -184,6 +184,24 @@ def remove_family_member():
     for i in family.members:
         if name in i:
             family.members.remove(i)
+        else:
+            print "---------------------------------------------"
+            print "Family Member not found!"
+            print "1. Try Again"
+            print "2. Return"
+            print "---------------------------------------------"
+
+            while True:
+                try:
+                    choice = int(raw_input("\nPlease Choose:"))
+                    break
+                except ValueError:
+                    print "not a number"
+
+            if choice == 1:
+                remove_family_member()
+            elif choice == 2:
+                family_menu()
 
     print name + " has been deleted from the " + family.name + " family!"
     raw_input("Press enter to continue: ")
