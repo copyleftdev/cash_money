@@ -4,11 +4,12 @@ class Household():
     def __init__(self, name):
         self.name = name
         '''
-         for members remember to do a tuple of the
-         [earner name, monthly income, monthly expenditure]
-         example: (["joe", 2345, 1121], ["schmoe", 1234, 1000])
+         for members remember to do a dictionary with earner name as primary key
+         and monthly income/expenditures in a list within that key
+         {"Name": [Income, Expenditure]}
+         example: {"joe": [2345, 1121], "schmoe": [1234, 1000]}
         '''
-        self.members = []
+        self.members = {}
         self.monthly_income = 0
         self.monthly_expenditure = 0
         self.yearly_income = 0
@@ -34,19 +35,19 @@ class Household():
             print "---------------------------------------------\n"
             print "The " + self.name + " household:\n"
             print "There are " + str(len(self.members)) + " incomes."
-            for i in self.members: print str(i[0]) + " makes " + str(i[1]) + " per month.\n"
-            print "The household makes " + str(self.monthly_income) + " per month"
-            print "and spends " + str(self.monthly_expenditure) + " per month."
-            print str(self.monthly_remainder) + " is left per month."
+            for i in self.members: print str(i[0]) + " makes " + str(format(i[1], '.2f')) + " per month.\n"
+            print "The household makes " + str(format(self.monthly_income, '.2f')) + " per month"
+            print "and spends " + str(format(self.monthly_expenditure, '.2f')) + " per month."
+            print str(format(self.monthly_remainder, '.2f')) + " is left per month."
             print "---------------------------------------------\n"
         elif choice == 2:
             print "---------------------------------------------\n"
             print "The " + self.name + " household:\n"
             print "There are " + str(len(self.members)) + " incomes."
-            for i in self.members: print str(i[0]) + " makes " + str(i[1] * 12) + " per year.\n"
-            print "The household makes " + str(self.yearly_income) + " per year"
-            print "and spends " + str(self.yearly_expenditure) + " per year."
-            print str(self.yearly_remainder) + " is left per year."
+            for i in self.members: print str(i[0]) + " makes " + str(format(i[1] * 12, '.2f')) + " per year.\n"
+            print "The household makes " + str(format(self.yearly_income, '.2f')) + " per year"
+            print "and spends " + str(format(self.yearly_expenditure, '.2f')) + " per year."
+            print str(format(self.yearly_remainder, '.2f')) + " is left per year."
             print "---------------------------------------------\n"
 
     def household_yearly_calculator(self):

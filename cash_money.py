@@ -76,6 +76,8 @@ def family_menu():
         "Please choose from the above choices"
         family_menu()
 
+def edit_member():
+    #this needs to be able to edit name, income, and add expenditures.
 
 # Family is initialized. When load function is enabled it will read some csv and initialize the new "family"
 def new_household():
@@ -137,7 +139,7 @@ def new_family_member():
         # print 'pay.weekly_income'
         # print pay.weekly_income
         # print '\n'
-        # print "new_person.montly_income"
+        # print "new_person.monthly_income"
         # print new_person.monthly_income
         # print '\n'
         # print "new_person.yearly_income"
@@ -172,6 +174,10 @@ def new_family_member():
         print name + " added!"
         raw_input("Press enter to continue:")
         family_menu()
+    else:
+        print "\n Please choose from above numbers"
+        raw_input("Press enter to continue: ")
+        new_family_member()
 
 
 def remove_family_member():
