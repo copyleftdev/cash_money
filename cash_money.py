@@ -32,7 +32,7 @@ def family_menu():
     print "=============================================", "\n"
     print "1. Add a new family member"
     print "2. Remove a family member"
-    print "3. Edit a family member"
+    print "3. Edit a family member/Add Expenditures"
     print "4. Show family info"
     print "5. Rename family"
     print "6. Save family"
@@ -54,8 +54,7 @@ def family_menu():
         remove_family_member()
         family_menu()
     elif family_menu_choice == 3:
-        #edit family member, this will add expenditures, probably pretty complicated
-        family_menu()
+        edit_member()
     elif family_menu_choice == 4:
         family.show_info()
         raw_input("Press enter to continue: ")
@@ -80,8 +79,9 @@ def family_menu():
 
 def edit_member():
     #this needs to be able to edit name, income, and add expenditures.
-    pass
-
+    print "\nWhich family member would you like to edit?"
+    print "---------------------------------------------"
+    for key in family.members
 # Family is initialized. When load function is enabled it will read some csv and initialize the new "family"
 def new_household():
     global family

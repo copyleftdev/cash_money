@@ -3,6 +3,11 @@ class MonthlyIncome():
     def __init__(self, name, monthly_income):
         self.name = name
         self.monthly_income = monthly_income
+        '''
+        expenditures should look like {expenditure_name: amount}
+        {"rent": 1000}
+        '''
+        self.expenditures = {}
         self.monthly_expenditure = 0
         self.remaining = 0
         self.weekly_income = self.monthly_income / 4
