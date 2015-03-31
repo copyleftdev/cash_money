@@ -59,6 +59,7 @@ def family_menu():
     elif family_menu_choice == 4:
         family.show_info()
         raw_input("Press enter to continue: ")
+        family_menu()
     elif family_menu_choice == 5:
         family.name = raw_input("What is your new family name?:")
         print "This is the " + family.name + " household"
@@ -76,8 +77,10 @@ def family_menu():
         "Please choose from the above choices"
         family_menu()
 
+
 def edit_member():
     #this needs to be able to edit name, income, and add expenditures.
+    pass
 
 # Family is initialized. When load function is enabled it will read some csv and initialize the new "family"
 def new_household():
@@ -139,13 +142,16 @@ def new_family_member():
         # print 'pay.weekly_income'
         # print pay.weekly_income
         # print '\n'
+        # print 'pay.biweekly_income'
+        # print pay.biweekly_income
+        # print '\n'
         # print "new_person.monthly_income"
         # print new_person.monthly_income
         # print '\n'
         # print "new_person.yearly_income"
         # print new_person.yearly_income
         # print '\n'
-        family.members.append([new_person.name, new_person.monthly_income, new_person.monthly_expenditure])
+        family.members[new_person.name]=[new_person.monthly_income, new_person.monthly_expenditure]
         print "\n"
         print name + " added!"
         raw_input("Press enter to continue...")
@@ -161,7 +167,7 @@ def new_family_member():
 
         name = raw_input("What is your name?: ")
         new_person = monthly.MonthlyIncome(name, salary/12)
-        family.members.append([new_person.name, new_person.monthly_income, new_person.monthly_expenditure])
+        family.members[new_person.name]=[new_person.monthly_income, new_person.monthly_expenditure]
         print "\n"
         print name + " added!"
         raw_input("Press enter to continue:")
@@ -169,7 +175,7 @@ def new_family_member():
     elif menu_choice == 3:
         name = raw_input("What is your name?: ")
         new_person = monthly.MonthlyIncome(name, 0)
-        family.members.append([new_person.name, new_person.monthly_income, new_person.monthly_expenditure])
+        family.members[new_person.name]=[new_person.monthly_income, new_person.monthly_expenditure]
         print "\n"
         print name + " added!"
         raw_input("Press enter to continue:")
@@ -182,32 +188,31 @@ def new_family_member():
 
 def remove_family_member():
     print "Who would you like to delete?: "
-    for i in family.members:
-        print str(i[0]) + ": income = " + str(i[1]) + ", expenditure = " + str(i[2])
+    for key in family.members:
+        print key + ": income = " + str(family.members[key][0]) + ", expenditure = " + str(family.members[key][1])
 
     name = raw_input("Please enter a name: ")
 
-    for i in family.members:
-        if name in i:
-            family.members.remove(i)
-        else:
-            print "---------------------------------------------"
-            print "Family Member not found!"
-            print "1. Try Again"
-            print "2. Return"
-            print "---------------------------------------------"
+    if name in family.members:
+        del family.members[name]
+    else:
+        print "---------------------------------------------"
+        print "Family Member not found!"
+        print "1. Try Again"
+        print "2. Return"
+        print "---------------------------------------------"
 
-            while True:
-                try:
-                    choice = int(raw_input("\nPlease Choose:"))
-                    break
-                except ValueError:
-                    print "not a number"
+        while True:
+            try:
+                choice = int(raw_input("\nPlease Choose:"))
+                break
+            except ValueError:
+                print "not a number"
 
-            if choice == 1:
-                remove_family_member()
-            elif choice == 2:
-                family_menu()
+        if choice == 1:
+            remove_family_member()
+        elif choice == 2:
+            family_menu()
 
     print name + " has been deleted from the " + family.name + " family!"
     raw_input("Press enter to continue: ")

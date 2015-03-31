@@ -35,7 +35,7 @@ class Household():
             print "---------------------------------------------\n"
             print "The " + self.name + " household:\n"
             print "There are " + str(len(self.members)) + " incomes."
-            for i in self.members: print str(i[0]) + " makes " + str(format(i[1], '.2f')) + " per month.\n"
+            for key in self.members: print key + " makes " + str(format(self.members[key][0], '.2f')) + " per month.\n"
             print "The household makes " + str(format(self.monthly_income, '.2f')) + " per month"
             print "and spends " + str(format(self.monthly_expenditure, '.2f')) + " per month."
             print str(format(self.monthly_remainder, '.2f')) + " is left per month."
@@ -44,7 +44,7 @@ class Household():
             print "---------------------------------------------\n"
             print "The " + self.name + " household:\n"
             print "There are " + str(len(self.members)) + " incomes."
-            for i in self.members: print str(i[0]) + " makes " + str(format(i[1] * 12, '.2f')) + " per year.\n"
+            for key in self.members: print key + " makes " + str(format(self.members[key][0] * 12, '.2f')) + " per year.\n"
             print "The household makes " + str(format(self.yearly_income, '.2f')) + " per year"
             print "and spends " + str(format(self.yearly_expenditure, '.2f')) + " per year."
             print str(format(self.yearly_remainder, '.2f')) + " is left per year."
@@ -58,9 +58,9 @@ class Household():
         self.yearly_expenditure = 0
         self.yearly_remainder = 0
 
-        for i in self.members:
-            self.monthly_income += i[1]
-            self.monthly_expenditure += i[2]
+        for key in self.members:
+            self.monthly_income += self.members[key][0]
+            self.monthly_expenditure -= self.members[key][1]
 
         self.yearly_income = self.monthly_income * 12
         self.yearly_expenditure = self.monthly_expenditure * 12
