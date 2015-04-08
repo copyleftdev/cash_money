@@ -84,14 +84,13 @@ def edit_member():
         print key
     print "---------------------------------------------"
 
-    member_str = raw_input("Please enter a name: ")
+    member_str = raw_input("Please enter a name: \n")
     if member_str in family.members:
         member_choice = family.members[member_str]
-        print member_choice
         # new menu to edit each member dictionary entry.
         def edit_member_menu():
             print "Monthly Income " + str(member_choice[0])
-            print "Monthly Expenditures: "
+            print "\nMonthly Expenditures: "
             for key, val in member_choice[1].items():
                 print key + ": " + str(val)
             print "---------------------------------------------"
@@ -123,26 +122,87 @@ def edit_member():
                 member_choice[1][expenditure_name] = expenditure_amount
                 edit_member_menu()
 
+            # deleting expenditure
             elif member_menu_choice == 2:
-                #remove expenditure
+                print "---------------------------------------------"
+                for key, val in member_choice[1].items():
+                    print key + ": " + str(val)
+                while True:
+                    expenditure_to_delete = raw_input("\nWhich expenditure to delete?: ")
+                    if expenditure_to_delete in member_choice[1]:
+                        del member_choice[1][expenditure_to_delete]
+                        print expenditure_to_delete + " Deleted!\n"
+                        break
+                    print "Expenditure not found, try again"
                 edit_member_menu()
+
+            # changing income amount
             elif member_menu_choice == 3:
-                #change income
+                print "---------------------------------------------"
+                print "Changing " + member_str + " income: "
+                print "Are you hourly or salaried?"
+                print "1. Hourly"
+                print "2. Salaried"
+                print "3. No income"
+                print "---------------------------------------------"
+
+                while True:
+                    global menu_choice
+                    try:
+                        menu_choice = int(raw_input("Please choose a number: "))
+                        break
+                    except ValueError:
+                        print "not a number"
+
+                if menu_choice == 1:
+                    while True:
+                        global hourly_rate
+                        try:
+                            hourly_rate = float(raw_input("Hourly Rate: "))
+                            break
+                        except ValueError:
+                            print "not a number"
+                    while True:
+                        global weekly_hrs
+                        try:
+                            weekly_hrs = float(raw_input("Hours worked per week: "))
+                            break
+                        except ValueError:
+                            print "not a number"
+                    pay = hourly_calculator.HourlyCalculator(hourly_rate, weekly_hrs)
+                    member_choice[0] = pay.monthly_income
+                elif menu_choice == 2:
+                    while True:
+                        global salary
+                        try:
+                            salary = float(raw_input("Yearly Salary: "))
+                            break
+                        except ValueError:
+                            print "not a number"
+                    member_choice[0] = salary/12
+                print "Income changed. New Monthly income: " + str(member_choice[0])
                 edit_member_menu()
+
             elif member_menu_choice == 4:
                 #change name
+                pass
             elif member_menu_choice == 5:
                 family_menu()
             else:
                 print "Not in range"
+                edit_member_menu()
 
         edit_member_menu()
 
-# Family is initialized. When load function is enabled it will read some csv and initialize the new "family"
+    #this handles when user doesn't enter correct name
+    else:
+        print "Family Member not found"
+        edit_member()
+
+
 def new_household():
     global family
     household_name = raw_input("Please name your household: ")
-
     family = household.Household(household_name)
     print "---------------------------------------------", "\n"
     family_menu()
