@@ -13,8 +13,8 @@ def main_menu():
     print "=============================================", "\n"
     print "Main Menu:"
     print "What would you like to do?: "
-    print "Make a new household: enter 1"
-    print "Load a previous household: enter 2", "\n"
+    print "1. Make a new household"
+    print "2. Load a previous household    ", "\n"
     print "=============================================", "\n"
     action_choice = raw_input("Please choose: ")
 
@@ -32,11 +32,12 @@ def family_menu():
     print "=============================================", "\n"
     print "1. Add a new family member"
     print "2. Remove a family member"
-    print "3. Edit a family member"
+    print "3. Edit a family member/Add Expenditures"
     print "4. Show family info"
     print "5. Rename family"
     print "6. Save family"
-    print "7. Main Menu"
+    print "7. Create Report"
+    print "8. Main Menu"
     print "=============================================", "\n"
 
     while True:
@@ -53,26 +54,34 @@ def family_menu():
         remove_family_member()
         family_menu()
     elif family_menu_choice == 3:
-        #edit family member
-        family_menu()
+        edit_member()
     elif family_menu_choice == 4:
         family.show_info()
         raw_input("Press enter to continue: ")
+        family_menu()
     elif family_menu_choice == 5:
         family.name = raw_input("What is your new family name?:")
-        family.show_info()
+        print "This is the " + family.name + " household"
         raw_input("press enter to continue")
         family_menu()
     elif family_menu_choice == 6:
         #Save family
         family_menu()
     elif family_menu_choice == 7:
+        #create report
+        family_menu()
+    elif family_menu_choice == 8:
         main_menu()
     else:
         "Please choose from the above choices"
         family_menu()
 
 
+def edit_member():
+    #this needs to be able to edit name, income, and add expenditures.
+    print "\nWhich family member would you like to edit?"
+    print "---------------------------------------------"
+    for key in family.members
 # Family is initialized. When load function is enabled it will read some csv and initialize the new "family"
 def new_household():
     global family
@@ -123,8 +132,7 @@ def new_family_member():
         name = raw_input("What is your name?: ")
         pay = hourly_calculator.HourlyCalculator(hourly_rate, weekly_hrs)
         new_person = monthly.MonthlyIncome(name, pay.monthly_income)
-
-        #debug calculations
+        # debug calculations
         # print 'pay.hours_per_week'
         # print pay.hours_per_week
         # print "\n"
@@ -134,14 +142,16 @@ def new_family_member():
         # print 'pay.weekly_income'
         # print pay.weekly_income
         # print '\n'
-        # print "new_person.montly_income"
+        # print 'pay.biweekly_income'
+        # print pay.biweekly_income
+        # print '\n'
+        # print "new_person.monthly_income"
         # print new_person.monthly_income
         # print '\n'
         # print "new_person.yearly_income"
         # print new_person.yearly_income
         # print '\n'
-
-        family.members.append([new_person.name, new_person.yearly_income, new_person.yearly_expenditure])
+        family.members[new_person.name]=[new_person.monthly_income, new_person.monthly_expenditure]
         print "\n"
         print name + " added!"
         raw_input("Press enter to continue...")
@@ -157,32 +167,52 @@ def new_family_member():
 
         name = raw_input("What is your name?: ")
         new_person = monthly.MonthlyIncome(name, salary/12)
-        family.members.append([new_person.name, new_person.yearly_income, new_person.yearly_expenditure])
+        family.members[new_person.name]=[new_person.monthly_income, new_person.monthly_expenditure]
         print "\n"
         print name + " added!"
         raw_input("Press enter to continue:")
         family_menu()
-
     elif menu_choice == 3:
         name = raw_input("What is your name?: ")
         new_person = monthly.MonthlyIncome(name, 0)
-        family.members.append([new_person.name, new_person.yearly_income, new_person.yearly_expenditure])
+        family.members[new_person.name]=[new_person.monthly_income, new_person.monthly_expenditure]
         print "\n"
         print name + " added!"
         raw_input("Press enter to continue:")
         family_menu()
+    else:
+        print "\n Please choose from above numbers"
+        raw_input("Press enter to continue: ")
+        new_family_member()
 
 
 def remove_family_member():
     print "Who would you like to delete?: "
-    for i in family.members:
-        print str(i[0]) + ": income = " + str(i[1]) + ", expenditure = " + str(i[2])
+    for key in family.members:
+        print key + ": income = " + str(family.members[key][0]) + ", expenditure = " + str(family.members[key][1])
 
     name = raw_input("Please enter a name: ")
 
-    for i in family.members:
-        if name in i:
-            family.members.remove(i)
+    if name in family.members:
+        del family.members[name]
+    else:
+        print "---------------------------------------------"
+        print "Family Member not found!"
+        print "1. Try Again"
+        print "2. Return"
+        print "---------------------------------------------"
+
+        while True:
+            try:
+                choice = int(raw_input("\nPlease Choose:"))
+                break
+            except ValueError:
+                print "not a number"
+
+        if choice == 1:
+            remove_family_member()
+        elif choice == 2:
+            family_menu()
 
     print name + " has been deleted from the " + family.name + " family!"
     raw_input("Press enter to continue: ")

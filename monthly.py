@@ -3,17 +3,22 @@ class MonthlyIncome():
     def __init__(self, name, monthly_income):
         self.name = name
         self.monthly_income = monthly_income
-        self.expenditure = 0
+        '''
+        expenditures should look like {expenditure_name: amount}
+        {"rent": 1000}
+        '''
+        self.expenditures = {}
+        self.monthly_expenditure = 0
         self.remaining = 0
         self.weekly_income = self.monthly_income / 4
         self.yearly_income = self.monthly_income * 12
-        self.yearly_expenditure = self.expenditure * 12
+        self.yearly_expenditure = self.monthly_expenditure * 12
 
     def show_info(self):
         print "---------------------------------------------"
         print self.name+": "
         print "Monthly Income: " + str(self.monthly_income)
-        print "Monthly Expenditures: " + str(self.expenditure)
+        print "Monthly Expenditures: " + str(self.monthly_expenditure)
         print "Monthly Remainder: " + str(self.remaining)
         print "---------------------------------------------"
 
@@ -23,9 +28,9 @@ class MonthlyIncome():
         self.calculate_remaining()
 
     def add_expenditure(self, new_expenditure):
-        self.expenditure += new_expenditure
-        print "Expenditure added, total expenditure: "+str(self.expenditure) + "\n"
+        self.monthly_expenditure += new_expenditure
+        print "Expenditure added, total expenditure: "+str(self.monthly_expenditure) + "\n"
         self.calculate_remaining()
 
     def calculate_remaining(self):
-        self.remaining = self.monthly_income - self.expenditure
+        self.remaining = self.monthly_income - self.monthly_expenditure
