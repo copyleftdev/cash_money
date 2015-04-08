@@ -81,7 +81,17 @@ def edit_member():
     #this needs to be able to edit name, income, and add expenditures.
     print "\nWhich family member would you like to edit?"
     print "---------------------------------------------"
-    for key in family.members
+    for key in family.members:
+        print key
+    print "---------------------------------------------"
+
+    member_choice = raw_input("Please enter a name: ")
+    if member_choice in family.members:
+        member = family_members[member_choice]
+
+
+
+
 # Family is initialized. When load function is enabled it will read some csv and initialize the new "family"
 def new_household():
     global family
@@ -151,7 +161,7 @@ def new_family_member():
         # print "new_person.yearly_income"
         # print new_person.yearly_income
         # print '\n'
-        family.members[new_person.name]=[new_person.monthly_income, new_person.monthly_expenditure]
+        family.members[new_person.name] = [new_person.monthly_income, new_person.monthly_expenditure]
         print "\n"
         print name + " added!"
         raw_input("Press enter to continue...")

@@ -7,7 +7,7 @@ class Household():
          for members remember to do a dictionary with earner name as primary key
          and monthly income/expenditures in a list within that key
          {"Name": [Income, Expenditure]}
-         example: {"joe": [2345, 1121], "schmoe": [1234, 1000]}
+         example: {"joe": [2345, {"expenditure", 1121}], "schmoe": [1234, {"expenditure", 1000}]}
         '''
         self.members = {}
         self.monthly_income = 0
