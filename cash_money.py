@@ -1,5 +1,4 @@
 # This file is the program that interacts with the user and utilizes person.py's individual class.
-import monthly
 import hourly_calculator
 import household
 import time
@@ -141,7 +140,6 @@ def new_family_member():
                 print "not a number"
         name = raw_input("What is your name?: ")
         pay = hourly_calculator.HourlyCalculator(hourly_rate, weekly_hrs)
-        new_person = monthly.MonthlyIncome(name, pay.monthly_income)
         # debug calculations
         # print 'pay.hours_per_week'
         # print pay.hours_per_week
@@ -161,7 +159,7 @@ def new_family_member():
         # print "new_person.yearly_income"
         # print new_person.yearly_income
         # print '\n'
-        family.members[new_person.name] = [new_person.monthly_income, new_person.monthly_expenditure]
+        family.members[name] = [pay.monthly_income, {}]
         print "\n"
         print name + " added!"
         raw_input("Press enter to continue...")
@@ -176,16 +174,14 @@ def new_family_member():
                 print "not a number"
 
         name = raw_input("What is your name?: ")
-        new_person = monthly.MonthlyIncome(name, salary/12)
-        family.members[new_person.name]=[new_person.monthly_income, new_person.monthly_expenditure]
+        family.members[name] = [salary/12, {}]
         print "\n"
         print name + " added!"
         raw_input("Press enter to continue:")
         family_menu()
     elif menu_choice == 3:
         name = raw_input("What is your name?: ")
-        new_person = monthly.MonthlyIncome(name, 0)
-        family.members[new_person.name]=[new_person.monthly_income, new_person.monthly_expenditure]
+        family.members[name] = [0, {}]
         print "\n"
         print name + " added!"
         raw_input("Press enter to continue:")
