@@ -18,7 +18,6 @@ class Household():
 
     def show_info(self):
         self.household_yearly_calculator()
-        print "\n"
         print "1. Monthly Summary"
         print "2. Yearly Summary"
 
