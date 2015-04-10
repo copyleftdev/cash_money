@@ -89,8 +89,9 @@ def edit_member():
         member_choice = family.members[member_str]
         # new menu to edit each member dictionary entry.
         def edit_member_menu():
+            print "---------------------------------------------"
             print "Monthly Income " + str(member_choice[0])
-            print "\nMonthly Expenditures: "
+            print "Monthly Expenditures: "
             for key, val in member_choice[1].items():
                 print key + ": " + str(val)
             print "---------------------------------------------"
@@ -183,9 +184,11 @@ def edit_member():
                 print "Income changed. New Monthly income: " + str(member_choice[0])
                 edit_member_menu()
 
+            # changing name of current member
             elif member_menu_choice == 4:
-                #change name
-                pass
+                new_name = raw_input("What is your new name?: \n")
+                family.members[new_name] = family.members[member_str]
+                edit_member_menu()
             elif member_menu_choice == 5:
                 family_menu()
             else:
