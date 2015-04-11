@@ -5,8 +5,6 @@ import time
 
 print "============================================="
 print "Monthly expenditure report v1.0 by Danny Chen"
-print "=============================================", "\n"
-
 
 def main_menu():
     print "=============================================", "\n"
@@ -90,7 +88,7 @@ def edit_member():
         # new menu to edit each member dictionary entry.
         def edit_member_menu():
             print "---------------------------------------------"
-            print "Monthly Income " + str(member_choice[0])
+            print "Monthly Income " + str(format(member_choice[0], '.2f'))
             print "Monthly Expenditures: "
             for key, val in member_choice[1].items():
                 print key + ": " + str(val)
@@ -181,16 +179,23 @@ def edit_member():
                         except ValueError:
                             print "not a number"
                     member_choice[0] = salary/12
-                print "Income changed. New Monthly income: " + str(member_choice[0])
+                print "Income changed. New Monthly income: " + str(format(member_choice[0], '.2f'))
                 edit_member_menu()
 
             # changing name of current member
             elif member_menu_choice == 4:
                 new_name = raw_input("What is your new name?: \n")
                 family.members[new_name] = family.members[member_str]
-                edit_member_menu()
+                del family.members[member_str]
+                print member_str + " renamed to " + new_name +"!"
+                raw_input("Press enter to continue")
+                edit_member()
+
+            # return to family menu
             elif member_menu_choice == 5:
                 family_menu()
+
+            # reprints member menu with selected member
             else:
                 print "Not in range"
                 edit_member_menu()

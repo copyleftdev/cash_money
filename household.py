@@ -33,7 +33,15 @@ class Household():
             print "---------------------------------------------\n"
             print "The " + self.name + " household:\n"
             print "There are " + str(len(self.members)) + " incomes.\n"
-            for key in self.members: print key + " makes " + str(format(self.members[key][0], '.2f')) + " per month."
+            for each in self.members:
+                print each + " makes " + str(format(self.members[each][0], '.2f')) + " per month."
+                if len(self.members[each][1]) == 0:
+                    print each + " has no expenditures.\n"
+                else:
+                    print each + "'s " + "expenditures:"
+                    for key, value in self.members[each][1].items():
+                        print key + ": " + str(format(value, ".2f"))
+                    print "\n"
             print "\nThe household makes " + str(format(self.monthly_income, '.2f')) + " per month"
             print "and spends " + str(format(self.monthly_expenditure, '.2f')) + " per month."
             print str(format(self.monthly_remainder, '.2f')) + " is left per month."
@@ -42,7 +50,14 @@ class Household():
             print "---------------------------------------------\n"
             print "The " + self.name + " household:\n"
             print "There are " + str(len(self.members)) + " incomes.\n"
-            for key in self.members: print key + " makes " + str(format(self.members[key][0] * 12, '.2f')) + " per year."
+            for each in self.members:
+                print each + " makes " + str(format(self.members[each][0] * 12, '.2f')) + " per year."
+                if len(self.members[each][1]) == 0:
+                    print each + " has no expenditures.\n"
+                else:
+                    for key, value in self.members[each][1].items():
+                        print key + ": " + str(format(value * 12, ".2f"))
+                    print "\n"
             print "\nThe household makes " + str(format(self.yearly_income, '.2f')) + " per year"
             print "and spends " + str(format(self.yearly_expenditure, '.2f')) + " per year."
             print str(format(self.yearly_remainder, '.2f')) + " is left per year."
