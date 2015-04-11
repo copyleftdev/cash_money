@@ -1,3 +1,5 @@
+import pickle
+import os
 
 class Household():
     def __init__(self, name):
@@ -80,3 +82,14 @@ class Household():
         self.yearly_expenditure = self.monthly_expenditure * 12
         self.monthly_remainder = self.monthly_income - self.monthly_expenditure
         self.yearly_remainder = self.yearly_income - self.yearly_expenditure
+
+    def save_family(self):
+        #json.dump(self.mem bers, open(self.name + ".save", "a+"))
+        if self.name + ".save" in os.listdir(os.getcwd()):
+            os.remove(self.name+".save")
+            pickle.dump(self, open(self.name + ".save", "w+"))
+        else:
+            pickle.dump(self, open(self.name + ".save", "w+"))
+
+        print "family saved"
+        raw_input("Press Enter to continue:")
