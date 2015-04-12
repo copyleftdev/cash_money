@@ -37,8 +37,7 @@ def family_menu():
     print "4. Show family info"
     print "5. Rename family"
     print "6. Save family"
-    print "7. Create Report"
-    print "8. Main Menu"
+    print ". Main Menu"
     print "=============================================", "\n"
 
     while True:
@@ -69,9 +68,6 @@ def family_menu():
         family.save_family()
         family_menu()
     elif family_menu_choice == 7:
-        #create report
-        family_menu()
-    elif family_menu_choice == 8:
         main_menu()
     else:
         "Please choose from the above choices"
@@ -371,7 +367,5 @@ def load_family():
     else:
         print "No save files found."
         main_menu()
-
-
 
 main_menu()
