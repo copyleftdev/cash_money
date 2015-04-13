@@ -24,3 +24,4 @@ class HourlyCalculator():
 
         self.biweekly_income = self.weekly_income * 2
         self.monthly_income = self.biweekly_income * 2
+

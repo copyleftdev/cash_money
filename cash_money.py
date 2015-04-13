@@ -2,6 +2,8 @@
 import hourly_calculator
 import household
 import time
+import os
+import pickle
 
 print "============================================="
 print "Monthly expenditure report v1.0 by Danny Chen"
@@ -18,6 +20,8 @@ def main_menu():
     if action_choice == "1":
         print "Created new household."
         new_household()
+    elif action_choice == "2":
+        load_family()
     else:
         print "Please choose one of the above"
         main_menu()
@@ -33,8 +37,7 @@ def family_menu():
     print "4. Show family info"
     print "5. Rename family"
     print "6. Save family"
-    print "7. Create Report"
-    print "8. Main Menu"
+    print ". Main Menu"
     print "=============================================", "\n"
 
     while True:
@@ -62,12 +65,9 @@ def family_menu():
         raw_input("press enter to continue")
         family_menu()
     elif family_menu_choice == 6:
-        #Save family
+        family.save_family()
         family_menu()
     elif family_menu_choice == 7:
-        #create report
-        family_menu()
-    elif family_menu_choice == 8:
         main_menu()
     else:
         "Please choose from the above choices"
@@ -80,6 +80,7 @@ def edit_member():
     print "---------------------------------------------"
     for key in family.members:
         print key
+    print "cancel"
     print "---------------------------------------------"
 
     member_str = raw_input("Please enter a name: \n")
@@ -201,7 +202,8 @@ def edit_member():
                 edit_member_menu()
 
         edit_member_menu()
-
+    elif member_str.lower() == "cancel":
+        family_menu()
     #this handles when user doesn't enter correct name
     else:
         print "Family Member not found"
@@ -344,5 +346,26 @@ def remove_family_member():
     raw_input("Press enter to continue: ")
     family_menu()
 
+def load_family():
+    files = os.listdir(os.getcwd())
+    save_files = []
+    # saves are individual files in working directory in .save format, the name of the file is the family name
+    for i in files:
+        if ".save" in i: save_files.append(i)
+    if len(save_files) > 0:
+        for i in save_files: print i
+        save_choice = raw_input("Which family would you like to load?: ")
+
+        if save_choice in save_files:
+            global family
+            family = pickle.load(open(save_choice))
+            print save_choice + " loaded!"
+            family_menu()
+        else:
+            print "\n", save_choice + " NOT FOUND"
+            main_menu()
+    else:
+        print "No save files found."
+        main_menu()
 
 main_menu()
