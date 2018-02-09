@@ -1,4 +1,5 @@
-# This file is the program that interacts with the user and utilizes person.py's individual class.
+# This file is the program that interacts with the user and utilizes
+# person.py's individual class.
 import hourly_calculator
 import household
 import time
@@ -7,6 +8,7 @@ import pickle
 
 print "============================================="
 print "Monthly expenditure report v1.0 by Danny Chen"
+
 
 def main_menu():
     print "=============================================", "\n"
@@ -75,7 +77,7 @@ def family_menu():
 
 
 def edit_member():
-    #this needs to be able to edit name, income, and add expenditures.
+    # this needs to be able to edit name, income, and add expenditures.
     print "\nWhich family member would you like to edit?"
     print "---------------------------------------------"
     for key in family.members:
@@ -87,6 +89,7 @@ def edit_member():
     if member_str in family.members:
         member_choice = family.members[member_str]
         # new menu to edit each member dictionary entry.
+
         def edit_member_menu():
             print "---------------------------------------------"
             print "Monthly Income " + str(format(member_choice[0], '.2f'))
@@ -104,7 +107,8 @@ def edit_member():
             while True:
                 global member_menu_choice
                 try:
-                    member_menu_choice = int(raw_input("Please choose a number: \n"))
+                    member_menu_choice = int(
+                        raw_input("Please choose a number: \n"))
                     break
                 except ValueError:
                     print "not a number"
@@ -115,7 +119,8 @@ def edit_member():
                 while True:
                     global expenditure_amount
                     try:
-                        expenditure_amount = int(raw_input("What is the expenditure amount?: \n"))
+                        expenditure_amount = int(
+                            raw_input("What is the expenditure amount?: \n"))
                         break
                     except ValueError:
                         print "not a number"
@@ -128,7 +133,8 @@ def edit_member():
                 for key, val in member_choice[1].items():
                     print key + ": " + str(val)
                 while True:
-                    expenditure_to_delete = raw_input("\nWhich expenditure to delete?: ")
+                    expenditure_to_delete = raw_input(
+                        "\nWhich expenditure to delete?: ")
                     if expenditure_to_delete in member_choice[1]:
                         del member_choice[1][expenditure_to_delete]
                         print expenditure_to_delete + " Deleted!\n"
@@ -149,7 +155,8 @@ def edit_member():
                 while True:
                     global menu_choice
                     try:
-                        menu_choice = int(raw_input("Please choose a number: "))
+                        menu_choice = int(
+                            raw_input("Please choose a number: "))
                         break
                     except ValueError:
                         print "not a number"
@@ -165,11 +172,13 @@ def edit_member():
                     while True:
                         global weekly_hrs
                         try:
-                            weekly_hrs = float(raw_input("Hours worked per week: "))
+                            weekly_hrs = float(
+                                raw_input("Hours worked per week: "))
                             break
                         except ValueError:
                             print "not a number"
-                    pay = hourly_calculator.HourlyCalculator(hourly_rate, weekly_hrs)
+                    pay = hourly_calculator.HourlyCalculator(
+                        hourly_rate, weekly_hrs)
                     member_choice[0] = pay.monthly_income
                 elif menu_choice == 2:
                     while True:
@@ -179,7 +188,7 @@ def edit_member():
                             break
                         except ValueError:
                             print "not a number"
-                    member_choice[0] = salary/12
+                    member_choice[0] = salary / 12
                 print "Income changed. New Monthly income: " + str(format(member_choice[0], '.2f'))
                 edit_member_menu()
 
@@ -188,7 +197,7 @@ def edit_member():
                 new_name = raw_input("What is your new name?: \n")
                 family.members[new_name] = family.members[member_str]
                 del family.members[member_str]
-                print member_str + " renamed to " + new_name +"!"
+                print member_str + " renamed to " + new_name + "!"
                 raw_input("Press enter to continue")
                 edit_member()
 
@@ -204,7 +213,7 @@ def edit_member():
         edit_member_menu()
     elif member_str.lower() == "cancel":
         family_menu()
-    #this handles when user doesn't enter correct name
+    # this handles when user doesn't enter correct name
     else:
         print "Family Member not found"
         edit_member()
@@ -219,7 +228,8 @@ def new_household():
 
 
 def new_family_member():
-    # if hourly then plugs into the hourly class, if salaried then directly plug into monthly class
+    # if hourly then plugs into the hourly class, if salaried then directly
+    # plug into monthly class
     print "---------------------------------------------"
     print "New family member"
     print "---------------------------------------------"
@@ -239,7 +249,7 @@ def new_family_member():
             print "not a number"
             new_family_member()
 
-    #hourly employee section
+    # hourly employee section
     if menu_choice == 1:
         name = raw_input("What is your name?: ")
         while True:
@@ -294,7 +304,7 @@ def new_family_member():
             except ValueError:
                 print "not a number"
 
-        family.members[name] = [salary/12, {}]
+        family.members[name] = [salary / 12, {}]
         print "\n"
         print name + " added!"
         raw_input("Press enter to continue:")
@@ -346,14 +356,18 @@ def remove_family_member():
     raw_input("Press enter to continue: ")
     family_menu()
 
+
 def load_family():
     files = os.listdir(os.getcwd())
     save_files = []
-    # saves are individual files in working directory in .save format, the name of the file is the family name
+    # saves are individual files in working directory in .save format, the
+    # name of the file is the family name
     for i in files:
-        if ".save" in i: save_files.append(i)
+        if ".save" in i:
+            save_files.append(i)
     if len(save_files) > 0:
-        for i in save_files: print i
+        for i in save_files:
+            print i
         save_choice = raw_input("Which family would you like to load?: ")
 
         if save_choice in save_files:
