@@ -189,7 +189,8 @@ def edit_member():
                         except ValueError:
                             print "not a number"
                     member_choice[0] = salary / 12
-                print "Income changed. New Monthly income: " + str(format(member_choice[0], '.2f'))
+                print "Income changed. New Monthly income: "
+                + str(format(member_choice[0], '.2f'))
                 edit_member_menu()
 
             # changing name of current member
@@ -327,7 +328,9 @@ def new_family_member():
 def remove_family_member():
     print "Who would you like to delete?: "
     for key in family.members:
-        print key + ": income = " + str(family.members[key][0]) + ", expenditure = " + str(family.members[key][1])
+        print key + ": income = "
+        + str(family.members[key][0]) +
+        ", expenditure = " + str(family.members[key][1])
 
     name = raw_input("Please enter a name: ")
 
